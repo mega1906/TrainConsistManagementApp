@@ -1,14 +1,14 @@
 # TrainConsistManagementApp
 
-### Use Case 5: Preserve Insertion Order of Bogies (LinkedHashSet)
+### Use Case 6: Map Bogie to Capacity (HashMap)
 
-A small Java console app that shows how to maintain the attachment order of train bogies while still avoiding duplicates using a `LinkedHashSet`.  
-It combines the benefits of ordering (like a list) with uniqueness (like a set).
+A small Java console app that shows how to store bogie capacities using a `HashMap`.  
+Each bogie is mapped to its seating or load capacity using a simple key–value structure.
 
 This application:
-- Attaches bogies in the exact order they are added
-- Automatically ignores duplicate bogies
-- Preserves insertion sequence
-- Prints the final train formation
+- Creates a `HashMap` to link bogies with their capacities  
+- Inserts capacity values using `put()`  
+- Iterates through map entries to display each bogie and its capacity  
+- Demonstrates fast lookup-based access provided by HashMap
 
-Great for cases where the order of bogie attachment matters but duplicates should never be allowed.
+Great for scenarios where you need quick access to details based on a specific bogie name.
