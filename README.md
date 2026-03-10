@@ -1,13 +1,14 @@
 # TrainConsistManagementApp
 
-### Use Case 3: Track Unique Bogie IDs (HashSet)
+### Use Case 4: Maintain Ordered Bogie IDs (TreeSet & SortedSet)
 
-A small Java console app that demonstrates how to store bogie IDs using a `HashSet`.  
-It focuses on uniqueness handling—making sure no duplicate bogie IDs are added to the train consist.
+A small Java console app that shows how to maintain an ordered train consist using a `LinkedList`.  
+It focuses on positional operations like inserting bogies at specific locations and removing them from the front or rear.
 
 This application:
-- Stores bogie IDs in a `HashSet`
-- Automatically ignores duplicate entries
-- Displays the final list of unique bogie identifiers
+- Adds bogies in sequence (insertion order preserved)
+- Inserts a bogie at a specific position
+- Removes the first and last bogies
+- Displays the updated train structure after each change
 
-Very useful for validating data where duplicates should not be allowed.
+Useful for scenarios where the train order matters and frequent insert/remove operations are required.
