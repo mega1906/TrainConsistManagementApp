@@ -1,14 +1,15 @@
 # TrainConsistManagementApp
 
-### Use Case 6: Map Bogie to Capacity (HashMap)
+### Use Case 7: Sort Bogies by Capacity (Comparator)
 
-A small Java console app that shows how to store bogie capacities using a `HashMap`.  
-Each bogie is mapped to its seating or load capacity using a simple key–value structure.
+A small Java console app that shows how to sort custom bogie objects using a `Comparator`.  
+The program stores bogies with their seating capacities and then sorts them in ascending order.
 
 This application:
-- Creates a `HashMap` to link bogies with their capacities  
-- Inserts capacity values using `put()`  
-- Iterates through map entries to display each bogie and its capacity  
-- Demonstrates fast lookup-based access provided by HashMap
+- Creates bogie objects with name and capacity
+- Stores them in a `List`
+- Prints the bogies before sorting
+- Applies a custom Comparator to sort by capacity
+- Displays the sorted list
 
-Great for scenarios where you need quick access to details based on a specific bogie name.
+Useful for scenarios where you need custom ordering instead of default sorting behavior.
