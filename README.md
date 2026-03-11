@@ -1,15 +1,15 @@
 # TrainConsistManagementApp
 
-### Use Case 7: Sort Bogies by Capacity (Comparator)
+### Use Case 8: Filter Passenger Bogies Using Streams
 
-A small Java console app that shows how to sort custom bogie objects using a `Comparator`.  
-The program stores bogies with their seating capacities and then sorts them in ascending order.
+A small Java console app that shows how to filter bogies using the Java Stream API.  
+The program takes a list of bogies and extracts only those that meet a given capacity requirement.
 
 This application:
-- Creates bogie objects with name and capacity
-- Stores them in a `List`
-- Prints the bogies before sorting
-- Applies a custom Comparator to sort by capacity
-- Displays the sorted list
+- Creates a list of bogie objects
+- Converts the list into a stream
+- Applies a filter condition (capacity > 60 and capacity > 40)
+- Collects the filtered results into a new list
+- Displays bogies that satisfy the filter
 
-Useful for scenarios where you need custom ordering instead of default sorting behavior.
+A simple example of functional-style filtering using Streams.
