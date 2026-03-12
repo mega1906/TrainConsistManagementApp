@@ -1,14 +1,14 @@
 # TrainConsistManagementApp
 
-### Use Case 11: Validate Train ID and Cargo Code (Regex)
+### Use Case 12: Safety Compliance Check for Goods Bogies
 
-A small Java console app that demonstrates how to validate input formats using regular expressions.  
-The program accepts a Train ID and a Cargo Code from the user and checks if they follow the required patterns.
+A small Java console app that applies a real‑world safety rule to goods bogies using the Java Stream API.  
+It checks whether each bogie follows the required cargo safety standard.
 
 This application:
-- Takes Train ID input from the user  
-- Takes Cargo Code input  
-- Applies regex rules using `Pattern` and `Matcher`  
-- Prints whether each value matches the expected format  
+- Creates a list of goods bogies
+- Uses a stream with `allMatch()` to apply a safety rule
+- The rule: Cylindrical bogies must carry only Petroleum
+- Displays whether the entire train formation is safe or not
 
-A simple example of using regular expressions for format validation in Java.
+A simple example of using Streams for rule-based validation.
