@@ -1,15 +1,14 @@
 # TrainConsistManagementApp
 
-### Use Case 16: Sort Passenger Bogies by Capacity (Bubble Sort)
+### Use Case 17: Sort Bogie Names Using Arrays.sort()
 
-A small Java console app that demonstrates how to manually sort values using the Bubble Sort algorithm.  
-Instead of using built‑in sorting utilities, this example walks through basic algorithmic sorting logic.
+A small Java console app that shows how to sort bogie names alphabetically using Java’s built‑in `Arrays.sort()` method.  
+It demonstrates optimized sorting using standard library utilities instead of custom algorithms.
 
 This application:
-- Creates an array of passenger bogie capacities  
-- Compares adjacent elements  
-- Swaps values when they are out of order  
-- Repeats passes until the array is fully sorted  
-- Prints the final sorted capacities  
+- Creates an array of bogie type names
+- Prints the original unsorted list
+- Sorts the names using `Arrays.sort()`
+- Displays the sorted bogie names in alphabetical order
 
-A simple introduction to understanding how Bubble Sort works under the hood.
+A simple example of using Java’s built‑in array sorting features.

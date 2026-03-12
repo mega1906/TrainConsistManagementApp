@@ -7,23 +7,23 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.util.Arrays;
+
 /*
- * Use Case 16: Sort Passenger Bogies by Capacity (Bubble Sort – Algorithm Intro)
+ * Use Case 17: Sort Bogie Names Using Arrays.sort()
  *
  * Description:
- * This class demonstrates manual sorting of passenger bogie capacities using the Bubble Sort algorithm instead of built-in sorting utilities.
+ * This class demonstrates sorting of bogie type names alphabetically using Java’s built‑in Arrays.sort() method.
  *
  * At this stage, the application:
- * - Creates an array of capacities
- * - Compares adjacent values
- * - Swaps values when required
- * - Repeats passes until sorted
- * - Displays sorted result
+ * - Creates an array of bogie names
+ * - Uses Arrays.sort() for sorting
+ * - Displays sorted results
  *
- * This maps algorithmic sorting logic using Bubble Sort.
+ * This maps optimized sorting using Java library utilities.
  *
  * @author Developer
- * @version 16.0
+ * @version 17.0
  */
 
 public class TrainConsistManagementApp {
@@ -120,41 +120,25 @@ public class TrainConsistManagementApp {
 		System.out.println("==========================================\n");
 
 		System.out.println("================================================");
-		System.out.println(" UC16 - Manual Sorting using Bubble Sort ");
+		System.out.println(" UC17 - Sort Bogie Names Using Arrays.sort() ");
 		System.out.println("================================================\n");
 
-		// Create array of passenger bogie capacities
-		int[] capacities = {72, 56, 24, 70, 60, 42};
+		// Create array of bogie names
+		String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
 
-		// Display original order
-		System.out.println("Original Capacities:");
-		for (int c : capacities) {
-			System.out.print(c + " ");
-		}
+		// Display original list
+		System.out.println("Original Bogie Names:");
+		System.out.println(Arrays.toString(bogieNames));
 		System.out.println();
 
-		// Bubble Sort
-		// Outer loop controls number of passes
-		for (int i = 0; i < capacities.length - 1; i++) {
+		// Sort using Arrays.sort()
+		Arrays.sort(bogieNames);
 
-			// Inner loop compares adjacent elements
-			for (int j = 0; j < capacities.length - 1 - i; j++) {
+		// Display sorted names
+		System.out.println("Sorted Bogie Names (Alphabetical):");
+		System.out.println(Arrays.toString(bogieNames));
+		System.out.println();
 
-				// Swap if out of order
-				if (capacities[j] > capacities[j + 1]) {
-					int temp = capacities[j];
-					capacities[j] = capacities[j + 1];
-					capacities[j + 1] = temp;
-				}
-			}
-		}
-
-		// Display sorted result
-		System.out.println("\nSorted Capacities (Ascending):");
-		for (int c : capacities) {
-			System.out.print(c + " ");
-		}
-
-		System.out.println("\n\nUC16 sorting completed...");
+		System.out.println("UC17 sorting completed...");
 	}
 }
