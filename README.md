@@ -1,15 +1,15 @@
 # TrainConsistManagementApp
 
-### Use Case 13: Performance Comparison (Loops vs Streams)
+### Use Case 14: Handle Invalid Bogie Capacity (Custom Exception)
 
-A small Java console app that compares the execution time of loop-based filtering vs stream-based filtering.  
-It uses `System.nanoTime()` to measure how long each approach takes to process a large dataset of bogies.
+A small Java console app that shows how to enforce validation rules using a custom exception.  
+It prevents creating passenger bogies with invalid seating capacity and handles errors gracefully.
 
 This application:
-- Generates a large list of test bogies
-- Filters bogies using a traditional `for` loop
-- Filters the same dataset using a Stream with `filter()`
-- Measures and prints the execution time of both methods
-- Ensures both filtering methods return the same result
+- Defines a custom `InvalidCapacityException`
+- Validates bogie capacity inside the constructor
+- Throws an exception when capacity is zero or negative
+- Creates valid bogies successfully
+- Catches and displays errors for invalid bogies
 
-A simple example showing how Streams and loops perform under high-volume data processing.
+A simple example of fail‑fast validation using checked exceptions in Java.

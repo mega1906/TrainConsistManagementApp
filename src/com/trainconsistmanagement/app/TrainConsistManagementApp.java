@@ -8,26 +8,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
- * Use Case 13: Performance Comparison (Loops vs Streams)
+ * Use Case 14: Handle Invalid Bogie Capacity (Custom Exception)
  *
  * Description:
- * This class compares execution time of loop-based filtering
- * versus stream-based filtering using System.nanoTime().
+ * This class prevents creation of passenger bogies
+ * with invalid seating capacity using a custom exception.
  *
  * At this stage, the application:
- * - Creates bogie test dataset
- * - Measures loop execution time
- * - Measures stream execution time
- * - Calculates elapsed duration
- * - Displays performance results
+ * - Defines a custom exception
+ * - Validates capacity inside constructor
+ * - Throws exception if capacity ≤ 0
+ * - Prevents invalid bogie creation
+ * - Continues execution safely
  *
- * This maps performance benchmarking using high-resolution timing.
+ * This maps fail-fast validation using checked exceptions.
  *
  * @author Developer
- * @version 13.0
+ * @version 14.0
  */
 
 public class TrainConsistManagementApp {
+	// Custom Exception
+	static class InvalidCapacityException extends Exception {
+		public InvalidCapacityException(String message) { super(message); }
+	}
+
 	// Inner Bogie class to model passenger bogies
 	static class Bogie { // 8 usages
 		String name;   // 3 usages
@@ -60,6 +65,25 @@ public class TrainConsistManagementApp {
 		}
 	}
 
+	// Passenger Bogie model with validation
+	static class PassengerBogie {
+		String name;
+		int capacity;
+
+		public PassengerBogie(String name, int capacity) throws InvalidCapacityException {
+			if (capacity <= 0) {
+				throw new InvalidCapacityException("Capacity must be greater than zero");
+			}
+			this.name = name;
+			this.capacity = capacity;
+		}
+
+		@Override
+		public String toString() {
+			return name + " -> " + capacity;
+		}
+	}
+
 	public static void main(String[] args) {
 		// Display welcome banner
 		System.out.println("==========================================");
@@ -67,48 +91,28 @@ public class TrainConsistManagementApp {
 		System.out.println("==========================================\n");
 
 		System.out.println("================================================");
-		System.out.println(" UC13 - Performance Comparison (Loops vs Streams) ");
+		System.out.println(" UC14 - Handle Invalid Bogie Capacity ");
 		System.out.println("================================================\n");
 
-		// Create large test dataset
-		List<Bogie> bogies = new ArrayList<>();
-		String[] types = {"Open", "Box", "Cylindrical", "Flat"};
-		Random rnd = new Random(42);
-		final int N = 200_000; // adjust higher/lower to see bigger/smaller timings
-
-		for (int i = 0; i < N; i++) {
-			String t = types[rnd.nextInt(types.length)];
-			int cap = 30 + rnd.nextInt(100); // 30..129
-			bogies.add(new Bogie(t, cap));
+		// Create a valid bogie
+		try {
+			PassengerBogie b1 = new PassengerBogie("Sleeper", 72);
+			System.out.println("Created Bogie: " + b1);
+		} 
+		catch (InvalidCapacityException e) {
+			System.out.println("Error: " + e.getMessage());
 		}
 
-		// Loop based filtering
-		long startLoop = System.nanoTime();
-		List<Bogie> loopFiltered = new ArrayList<>();
-		for (Bogie b : bogies) {
-			if (b.capacity > 60) {
-				loopFiltered.add(b);
-			}
-		}
-		long endLoop = System.nanoTime();
-		long loopTime = endLoop - startLoop;
-
-		// Stream based filtering
-		long startStream = System.nanoTime();
-		List<Bogie> streamFiltered = bogies.stream().filter(b -> b.capacity > 60).collect(Collectors.toList());
-		long endStream = System.nanoTime();
-		long streamTime = endStream - startStream;
-
-		// Use results to avoid dead-code elimination (counts not printed in snapshot)
-		if (loopFiltered.size() != streamFiltered.size()) {
-			throw new AssertionError("Mismatch between loop and stream results!");
+		// Attempt to create an invalid bogie (capacity <= 0)
+		try {
+			PassengerBogie b2 = new PassengerBogie("AC Chair", 0);
+			System.out.println("Created Bogie: " + b2);
+		} 
+		catch (InvalidCapacityException e) {
+			System.out.println("Error: " + e.getMessage());
 		}
 
-		// Display timings
-		System.out.println("Loop Execution Time (ns): " + loopTime);
-		System.out.println("Stream Execution Time (ns): " + streamTime);
-		System.out.println();
-		
-		System.out.println("UC13 performance benchmarking completed...");
+		System.out.println("\nUC14 exception handling completed...");
 	}
+
 }
