@@ -1,15 +1,15 @@
 # TrainConsistManagementApp
 
-### Use Case 14: Handle Invalid Bogie Capacity (Custom Exception)
+### Use Case 15: Safe Cargo Assignment Using try‑catch‑finally
 
-A small Java console app that shows how to enforce validation rules using a custom exception.  
-It prevents creating passenger bogies with invalid seating capacity and handles errors gracefully.
+A small Java console app that demonstrates how to safely assign cargo to goods bogies using structured exception handling.  
+It validates cargo rules, throws a custom runtime exception for unsafe combinations, and ensures the `finally` block always runs.
 
 This application:
-- Defines a custom `InvalidCapacityException`
-- Validates bogie capacity inside the constructor
-- Throws an exception when capacity is zero or negative
-- Creates valid bogies successfully
-- Catches and displays errors for invalid bogies
+- Defines a custom `CargoSafetyException`
+- Applies a rule: Rectangular bogies cannot carry Petroleum
+- Throws and catches the exception when the rule is violated
+- Performs safe cargo assignment when valid
+- Executes a `finally` block for logging after each attempt
 
-A simple example of fail‑fast validation using checked exceptions in Java.
+A simple example of applying safety checks and handling runtime errors using try‑catch‑finally.
