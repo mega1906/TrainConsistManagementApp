@@ -8,24 +8,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
- * Use Case 15: Safe Cargo Assignment Using try-catch-finally
+ * Use Case 16: Sort Passenger Bogies by Capacity (Bubble Sort – Algorithm Intro)
  *
  * Description:
- * This class safely assigns cargo to goods bogies while handling unsafe combinations using structured exception handling blocks.
+ * This class demonstrates manual sorting of passenger bogie capacities using the Bubble Sort algorithm instead of built-in sorting utilities.
  *
  * At this stage, the application:
- * - Defines a custom runtime exception
- * - Validates cargo assignment rules
- * - Throws exception for unsafe cargo
- * - Catches and handles the exception
- * - Executes finally block for logging
+ * - Creates an array of capacities
+ * - Compares adjacent values
+ * - Swaps values when required
+ * - Repeats passes until sorted
+ * - Displays sorted result
  *
- * This maps runtime safety handling using try-catch-finally.
+ * This maps algorithmic sorting logic using Bubble Sort.
  *
  * @author Developer
- * @version 15.0
+ * @version 16.0
  */
-
 
 public class TrainConsistManagementApp {
 	// Custom Exception
@@ -121,20 +120,41 @@ public class TrainConsistManagementApp {
 		System.out.println("==========================================\n");
 
 		System.out.println("================================================");
-		System.out.println(" UC15 - Safe Cargo Assignment ");
+		System.out.println(" UC16 - Manual Sorting using Bubble Sort ");
 		System.out.println("================================================\n");
 
-		// 1) Safe case: Cylindrical bogie with Petroleum
-		GoodsBogie cyl = new GoodsBogie("Cylindrical");
-		cyl.assignCargo("Petroleum");
+		// Create array of passenger bogie capacities
+		int[] capacities = {72, 56, 24, 70, 60, 42};
+
+		// Display original order
+		System.out.println("Original Capacities:");
+		for (int c : capacities) {
+			System.out.print(c + " ");
+		}
 		System.out.println();
 
-		// 2) Unsafe case: Rectangular bogie with Petroleum
-		GoodsBogie rect = new GoodsBogie("Rectangular");
-		rect.assignCargo("Petroleum");
-		System.out.println();
+		// Bubble Sort
+		// Outer loop controls number of passes
+		for (int i = 0; i < capacities.length - 1; i++) {
 
-		System.out.println("UC15 runtime handling completed...");
+			// Inner loop compares adjacent elements
+			for (int j = 0; j < capacities.length - 1 - i; j++) {
+
+				// Swap if out of order
+				if (capacities[j] > capacities[j + 1]) {
+					int temp = capacities[j];
+					capacities[j] = capacities[j + 1];
+					capacities[j + 1] = temp;
+				}
+			}
+		}
+
+		// Display sorted result
+		System.out.println("\nSorted Capacities (Ascending):");
+		for (int c : capacities) {
+			System.out.print(c + " ");
+		}
+
+		System.out.println("\n\nUC16 sorting completed...");
 	}
-
 }

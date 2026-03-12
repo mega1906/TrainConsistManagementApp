@@ -1,15 +1,15 @@
 # TrainConsistManagementApp
 
-### Use Case 15: Safe Cargo Assignment Using try‑catch‑finally
+### Use Case 16: Sort Passenger Bogies by Capacity (Bubble Sort)
 
-A small Java console app that demonstrates how to safely assign cargo to goods bogies using structured exception handling.  
-It validates cargo rules, throws a custom runtime exception for unsafe combinations, and ensures the `finally` block always runs.
+A small Java console app that demonstrates how to manually sort values using the Bubble Sort algorithm.  
+Instead of using built‑in sorting utilities, this example walks through basic algorithmic sorting logic.
 
 This application:
-- Defines a custom `CargoSafetyException`
-- Applies a rule: Rectangular bogies cannot carry Petroleum
-- Throws and catches the exception when the rule is violated
-- Performs safe cargo assignment when valid
-- Executes a `finally` block for logging after each attempt
+- Creates an array of passenger bogie capacities  
+- Compares adjacent elements  
+- Swaps values when they are out of order  
+- Repeats passes until the array is fully sorted  
+- Prints the final sorted capacities  
 
-A simple example of applying safety checks and handling runtime errors using try‑catch‑finally.
+A simple introduction to understanding how Bubble Sort works under the hood.
