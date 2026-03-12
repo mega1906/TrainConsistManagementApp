@@ -8,23 +8,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
- * Use Case 12: Safety Compliance Check for Goods Bogies
+ * Use Case 13: Performance Comparison (Loops vs Streams)
  *
  * Description:
- * This class enforces domain safety rules on goods bogies.
+ * This class compares execution time of loop-based filtering
+ * versus stream-based filtering using System.nanoTime().
  *
  * At this stage, the application:
- * - Creates goods bogie list
- * - Converts list into stream
- * - Applies safety validation rule
- * - Checks compliance using allMatch()
- * - Displays safety status
+ * - Creates bogie test dataset
+ * - Measures loop execution time
+ * - Measures stream execution time
+ * - Calculates elapsed duration
+ * - Displays performance results
  *
- * This maps real-world cargo safety rules using Streams.
+ * This maps performance benchmarking using high-resolution timing.
  *
  * @author Developer
- * @version 12.0
-
+ * @version 13.0
  */
 
 public class TrainConsistManagementApp {
@@ -45,58 +45,70 @@ public class TrainConsistManagementApp {
 	}
 
 	//Goods Bogie model
-    static class GoodsBogie { // 6 usages
-        String type;   // 3 usages
-        String cargo;  // 3 usages
+	static class GoodsBogie { // 6 usages
+		String type;   // 3 usages
+		String cargo;  // 3 usages
 
-        GoodsBogie(String type, String cargo) { // 4 usages
-            this.type = type;
-            this.cargo = cargo;
-        }
+		GoodsBogie(String type, String cargo) { // 4 usages
+			this.type = type;
+			this.cargo = cargo;
+		}
 
-        @Override
-        public String toString() {
-            return type + " -> " + cargo;
-        }
-    }
+		@Override
+		public String toString() {
+			return type + " -> " + cargo;
+		}
+	}
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		// Display welcome banner
 		System.out.println("==========================================");
 		System.out.println(" === Train Consist Management App === ");
 		System.out.println("==========================================\n");
+
+		System.out.println("================================================");
+		System.out.println(" UC13 - Performance Comparison (Loops vs Streams) ");
+		System.out.println("================================================\n");
+
+		// Create large test dataset
+		List<Bogie> bogies = new ArrayList<>();
+		String[] types = {"Open", "Box", "Cylindrical", "Flat"};
+		Random rnd = new Random(42);
+		final int N = 200_000; // adjust higher/lower to see bigger/smaller timings
+
+		for (int i = 0; i < N; i++) {
+			String t = types[rnd.nextInt(types.length)];
+			int cap = 30 + rnd.nextInt(100); // 30..129
+			bogies.add(new Bogie(t, cap));
+		}
+
+		// Loop based filtering
+		long startLoop = System.nanoTime();
+		List<Bogie> loopFiltered = new ArrayList<>();
+		for (Bogie b : bogies) {
+			if (b.capacity > 60) {
+				loopFiltered.add(b);
+			}
+		}
+		long endLoop = System.nanoTime();
+		long loopTime = endLoop - startLoop;
+
+		// Stream based filtering
+		long startStream = System.nanoTime();
+		List<Bogie> streamFiltered = bogies.stream().filter(b -> b.capacity > 60).collect(Collectors.toList());
+		long endStream = System.nanoTime();
+		long streamTime = endStream - startStream;
+
+		// Use results to avoid dead-code elimination (counts not printed in snapshot)
+		if (loopFiltered.size() != streamFiltered.size()) {
+			throw new AssertionError("Mismatch between loop and stream results!");
+		}
+
+		// Display timings
+		System.out.println("Loop Execution Time (ns): " + loopTime);
+		System.out.println("Stream Execution Time (ns): " + streamTime);
+		System.out.println();
 		
-        System.out.println("================================================");
-        System.out.println(" UC12 - Safety Compliance Check for Goods Bogies ");
-        System.out.println("================================================\n");
-
-        // Create goods bogie list
-        List<GoodsBogie> goodsBogies = new ArrayList<>();
-
-        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
-        goodsBogies.add(new GoodsBogie("Open", "Coal"));
-        goodsBogies.add(new GoodsBogie("Box", "Grain"));
-        goodsBogies.add(new GoodsBogie("Cylindrical", "Coal")); // invalid by rule
-
-        // Display input bogies
-        System.out.println("Goods Bogies in Train:");
-        goodsBogies.forEach(b -> System.out.println(b));
-        System.out.println();
-
-        // Safety rule with streams
-        // Rule: If type is Cylindrical, cargo MUST be Petroleum.
-        boolean isSafe = goodsBogies.stream().allMatch(b -> !b.type.equalsIgnoreCase("Cylindrical") || b.cargo.equalsIgnoreCase("Petroleum"));
-
-        // Display result
-        System.out.println("Safety Compliance Status: " + isSafe);
-        if (isSafe) {
-            System.out.println("Train formation is SAFE.");
-        } 
-        else {
-            System.out.println("Train formation is NOT SAFE.");
-        }
-        System.out.println();
-        
-        System.out.println("UC12 safety validation completed...");
-    }
+		System.out.println("UC13 performance benchmarking completed...");
+	}
 }
