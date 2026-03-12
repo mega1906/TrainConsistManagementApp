@@ -10,22 +10,22 @@ import java.util.regex.Pattern;
 import java.util.Arrays;
 
 /*
- * Use Case 18: Linear Search for Bogie ID (Array-Based Searching)
+ * Use Case 19: Binary Search for Bogie ID (Optimized Searching)
  * 
  * Description:
- * This class demonstrates searching for a specific bogie ID using a simple Linear Search algorithm.
+ * This class demonstrates searching for a specific bogie ID using the Binary Search algorithm on sorted data.
  *
  * At this stage, the application:
- * - Creates an array of bogie IDs
- * - Accepts a search key
- * - Traverse array sequentially 
- * - Stops when match is found
- * - Displays search results
+ * - Creates sorted bogie ID array
+ * - Defines search key
+ * - Applies binary search logic
+ * - Narrows search range each iteration
+ * - Displays result
  *
- * This maps basic searching logic using sequential traversal
+ * This maps optimized searching logic using divide-and-conquer.
  *
  * @author Developer
- * @version 18.0
+ * @version 19.0
  */
 
 public class TrainConsistManagementApp {
@@ -41,11 +41,11 @@ public class TrainConsistManagementApp {
 
 
 	// Inner Bogie class to model passenger bogies
-	static class Bogie { // 8 usages
-		String name;   // 3 usages
-		int capacity;  // 4 usages
+	static class Bogie { 
+		String name;  
+		int capacity;  
 
-		Bogie(String name, int capacity) { // 4 usages
+		Bogie(String name, int capacity) { 
 			this.name = name;
 			this.capacity = capacity;
 		}
@@ -57,13 +57,13 @@ public class TrainConsistManagementApp {
 	}
 
 	//Goods Bogie model
-	static class GoodsBogie { // 6 usages
-		String type;   // 3 usages
-		String cargo;  // 3 usages
+	static class GoodsBogie { 
+		String type;   
+		String cargo;  
 
 		GoodsBogie(String type) { this.type = type; }
 
-		GoodsBogie(String type, String cargo) { // 4 usages
+		GoodsBogie(String type, String cargo) { 
 			this.type = type;
 			this.cargo = cargo;
 		}
@@ -122,59 +122,55 @@ public class TrainConsistManagementApp {
 		System.out.println("==========================================\n");
 
 		System.out.println("================================================");
-		System.out.println(" UC18 - Linear Search for Bogie ID ");
+		System.out.println(" UC19 - Binary Search for Bogie ID ");
 		System.out.println("================================================\n");
 
-		// Create array of bogie IDs
+		// Create sorted array of bogie IDs
 		String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
 
-		// Bogie ID to search
-		String searchId1 = "BG308";
-		String searchId2 = "BG309";
+		// Ensure data is sorted before binary search (precondition)
+		Arrays.sort(bogieIds);
 
-		// Display all bogies
-		System.out.println("Available Bogie IDs:");
+		// Search key
+		String key = "BG309";
+
+		// Display available bogie IDs
+		System.out.println("Sorted Bogie IDs:");
 		for (String id : bogieIds) {
 			System.out.println(id);
 		}
 		System.out.println();
 
-		// Linear Search Logic
-		// Traverse each element sequentially
-		boolean found1 = false;
-		for (String id : bogieIds) {
-			if (id.equals(searchId1)) {   // Equality comparison using equals()
-				found1 = true;            // Set flag when match is found
-				break;                   // Early termination
+		// Binary Search Logic
+		int low = 0;
+		int high = bogieIds.length - 1;
+		boolean found = false;
+
+		while (low <= high) {
+			int mid = low + (high - low) / 2;          // safe mid calculation
+			int cmp = key.compareTo(bogieIds[mid]);    // lexicographic comparison
+
+			if (cmp == 0) {        // key equals middle element
+				found = true;
+				break;
+			} 
+			else if (cmp > 0) {  // key is greater -> search right half
+				low = mid + 1;
+			} 
+			else {               // key is smaller -> search left half
+				high = mid - 1;
 			}
 		}
 
 		// Display result
-		if (found1) {
-			System.out.println("Bogie " + searchId1 + " found in train consist.");
+		if (found) {
+			System.out.println("Bogie " + key + " found using Binary Search.");
 		} 
 		else {
-			System.out.println("Bogie " + searchId1 + " not found in train consist.");
+			System.out.println("Bogie " + key + " not found using Binary Search.");
 		}
 		System.out.println();
-		
-		boolean found2 = false;
-		for (String id : bogieIds) {
-			if (id.equals(searchId2)) {   // Equality comparison using equals()
-				found2 = true;            // Set flag when match is found
-				break;                   // Early termination
-			}
-		}
 
-		// Display result
-		if (found2) {
-			System.out.println("Bogie " + searchId2 + " found in train consist.");
-		} 
-		else {
-			System.out.println("Bogie " + searchId2 + " not found in train consist.");
-		}
-		System.out.println();
-		
-		System.out.println("UC18 search completed...");
+		System.out.println("UC19 search completed...");
 	}
 }

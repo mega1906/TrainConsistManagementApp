@@ -1,15 +1,15 @@
 # TrainConsistManagementApp
 
-### Use Case 18: Linear Search for Bogie ID (Array-Based Searching)
+### Use Case 19: Binary Search for Bogie ID (Optimized searching)
 
-A small Java console app that demonstrates how to search for a bogie ID using a simple Linear Search algorithm.  
-It checks each element in sequence until a match is found (or not found).
+A small Java console app that shows how to search for a bogie ID using the Binary Search algorithm.  
+This example performs fast, divide‑and‑conquer searching on a sorted list of IDs.
 
 This application:
-- Creates an array of bogie IDs  
-- Prints all available IDs  
-- Searches for specific IDs using linear traversal  
-- Stops as soon as a match is detected  
-- Displays whether each ID was found or not  
+- Creates a sorted array of bogie IDs  
+- Prints the available IDs  
+- Applies manual binary search logic  
+- Narrows the search range on each iteration  
+- Displays whether the target bogie ID was found  
 
-A simple example of sequential searching without using built‑in search utilities.
+A simple example of optimized searching using binary search instead of linear traversal.
