@@ -1,15 +1,15 @@
 # TrainConsistManagementApp
 
-### Use Case 8: Filter Passenger Bogies Using Streams
+### Use Case 9: Group Bogies by Type (groupingBy)
 
-A small Java console app that shows how to filter bogies using the Java Stream API.  
-The program takes a list of bogies and extracts only those that meet a given capacity requirement.
+A small Java console app that shows how to group bogies using `Collectors.groupingBy()`.  
+It takes a list of bogies and organizes them based on their type (name).
 
-This application:
-- Creates a list of bogie objects
-- Converts the list into a stream
-- Applies a filter condition (capacity > 60 and capacity > 40)
-- Collects the filtered results into a new list
-- Displays bogies that satisfy the filter
+### This application:
+- Creates a list of bogie objects  
+- Streams the list  
+- Groups bogies by their name using `groupingBy`  
+- Stores the result in a `Map<String, List<Bogie>>`  
+- Displays each bogie type along with all its capacity entries  
 
-A simple example of functional-style filtering using Streams.
+A simple example of classification and grouping using Java Streams.
