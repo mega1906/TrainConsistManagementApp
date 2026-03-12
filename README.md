@@ -1,15 +1,14 @@
 # TrainConsistManagementApp
 
-### Use Case 9: Group Bogies by Type (groupingBy)
+### Use Case 10: Count Total Seats in Train (reduce)
 
-A small Java console app that shows how to group bogies using `Collectors.groupingBy()`.  
-It takes a list of bogies and organizes them based on their type (name).
+A small Java console app that shows how to aggregate values using `Stream.reduce()`.  
+The program sums up the seating capacities of all bogies to produce a final total.
 
-### This application:
-- Creates a list of bogie objects  
-- Streams the list  
-- Groups bogies by their name using `groupingBy`  
-- Stores the result in a `Map<String, List<Bogie>>`  
-- Displays each bogie type along with all its capacity entries  
+This application:
+- Creates a list of bogie objects
+- Extracts each bogie’s capacity using `map()`
+- Uses `reduce()` to compute the total seating capacity
+- Displays the final aggregated seat count
 
-A simple example of classification and grouping using Java Streams.
+A simple example of performing aggregation operations using Java Streams.
